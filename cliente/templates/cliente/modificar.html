@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+<meta charset="iso-8859-1">
+<title>Receta</title>
+<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+<link href="{% static "login.css" %}" rel="stylesheet">
+<script language="javascript">
+<!--
+function eliminar(id) {
+	self.location.href='?del='+id;
+}
+function modificar(id) {
+	self.location.href='?mod='+id;
+}
+// -->
+</script>
+</head>
+<body>
+<p>Bienvenido {{usuario.username|upper}}, ultimo accceso {{usuario.last_login}}</p>
+<form class="form-horizontal" role="form" style="width:60%" method="post" enctype="multipart/form-data">{% csrf_token %}
+<legend>Modificar Receta</legend>
+  <div class="form-group">
+    <label for="nombre" class="col-lg-2 control-label">Nombre de la Receta</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la receta" value="{{ nom }}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="contenido" class="col-lg-2 control-label">Contenido</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="texto" name="texto" placeholder="Contenido de la receta" value="{{ tex }}">
+    </div>
+   </div>
+   <div class="form-group">
+    <div class="col-lg-10">
+    	<img src="{% static "imagenes/" %}{{ ima }}" width="100px"><br />
+      <input type="file" class="form-control" id="file" name="file">
+      
+    </div>
+   </div>
+   <input type="hidden" name="id" value="{{ id_mod }}">
+  <input type="submit" value="modificar" class="button">
+</form>
+</body>
+</html>
